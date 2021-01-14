@@ -1,0 +1,99 @@
+\documentclass[times, twoside, watermark]{style}
+\usepackage{blindtext}
+\usepackage{empheq}
+\usepackage{tikz}
+\usepackage{pgfplots} 
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{cases}
+\usepackage{algorithmicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\leadauthor{Paul-Antoine LE TOLGUENEC} 
+
+\begin{document}
+
+\title{Point-to-Point Navigation with Deep Reinforcement Learning }
+\shorttitle{ Deep Reinforcement Learning}
+
+% Use letters for affiliations, numbers to show equal authorship (if applicable) and to indicate the corresponding author
+\author[1,\Letter]{ Paul-Antoine Le Tolguenec}
+
+\affil[1]{ENSTA Bretagne, Brest}
+
+\maketitle
+
+%TC:break Abstract
+%the command above serves to have a word count for the abstract
+\begin{abstract}
+    Nowadays the problem of the autonomous vehicle is one of the most developed subjects in the world of research. 
+    Although there are different methods, methods based on deep learning are more and more used in this field. 
+    This article illustrates a solution based on Deep Reinforcement Learning.
+\end {abstract}
+%TC:break main
+%the command above serves to have a word count for the abstract
+
+\begin{keywords}
+Deep learning | Reinforcement | Control | Autonomous car
+\end{keywords}
+
+\begin{corrauthor}
+%\texttt{r.henriques{@}ucl.ac.uk}
+paul-antoine.le\textunderscore tolguenec\at ensta-bretagne.org
+\end{corrauthor}
+
+\maketitle
+
+\input{sections/introduction.tex}
+
+\input{sections/modelisation.tex}
+
+\input{sections/method.tex}
+
+\input{sections/experimental.tex}
+
+%\input{sections/sled.tex}
+
+%\input{sections/thickset.tex}
+
+%\input{sections/mapping_coverage.tex}
+
+%\input{sections/example.tex}
+
+% \begin{acknowledgements}
+% \blindtext
+% \end{acknowledgements}
+
+% \section*{Bibliography}
+% \bibliography{zHenriquesLab-Mendeley}
+
+% %% You can use these special %TC: tags to ignore certain parts of the text.
+% %TC:ignore
+% %the command above ignores this section for word count
+% \onecolumn
+% \newpage
+
+% \section*{Word Counts}
+% This section is \textit{not} included in the word count. 
+% \subsection*{Notes on Nature Methods Brief Communication}
+% \begin{itemize}
+% \item Abstract: 3 sentences, 70 words.
+% \item Main text: 3 pages, 2 figures, 1000-1500 words, more figures possible if under 3 pages
+% \end{itemize}
+
+% \subsection*{Statistics on word count}
+% \detailtexcount
+% \newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Supplementary Information %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \captionsetup*{format=largeformat}
+% \section{Something about something} \label{note:Note1} 
+% \Blindtext
+
+%TC:endignore
+%the command above ignores this section for word count
+
+\end{document}

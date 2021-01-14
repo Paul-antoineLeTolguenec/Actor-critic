@@ -1,0 +1,13 @@
+\section{Introduction}
+In recent years, mobile robotics has experienced unprecedented growth. Most of the methods concerning trajectory estimation are based on automatic laws.
+A very robust method is the linearizing loop control method. But in some cases this method has to be reworked, because it has to be linearised around a working point or other. 
+Another very robust method is that of potential fields, since it also allows to avoid certain obstacles that could appear spontaneously on the way to the robot. 
+But for this type of method it is often necessary to implement other layers that allow to find the path to reach a point in the defined space. 
+Most of the time it is also necessary to develop a finite state machine to manage the high level of the robot. 
+Usual methods are therefore very time-consuming to implement and can lead to mistakes. Moreover, once the control of the robot is set up, optimisation is difficult.
+With the progress of deep learning, a new control approach has emerged: deep reinforcement learning.
+The advantage of this method is that once the method is set up it can be generalised to many problems and it is only necessary to change certain parameters. Also this method is permanently optimized.
+In this article, I expose my work which has allowed me to train a model to make decisions to orientate a car so that it is able to go from point A to point B as quickly as possible by avoiding objects that appear as they go along.
+To train the model I use the A2C (Advantage Actor Critic) algorithm which uses the principle of reinforcement learning.
+Part II illustrates the modelling I have carried out and within which I have trained the network. Part III presents the implementation of the method (network architecture, theory ...).
+Finally, part IV illustrates the experimentation phase.

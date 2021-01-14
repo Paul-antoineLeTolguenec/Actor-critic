@@ -1,0 +1,13 @@
+\section*{Sled localization}
+    By having a box enclosing the trailing robot, and an interval framing the angle $x_4$, we are able to obtain a box containing the sled, knowing the length of the rope.
+    
+    This box has the shape of a pie sector. \textit{Equation}~\ref{eq:magnetometer} presents the position of the magnetometer as a function of the state of the system $x_1$, $x_2$ and $x_4$. Here all these variables are intervals. By applying a polar contractor to these intervals, we are able to obtain the intervals containing $x_m$ and $y_m$.
+
+    \begin{equation}\label{eq:magnetometer}
+        \left\lbrace
+            \begin{aligned}
+                x_m &= x_1 - L.cos(x_4) \\
+                y_m &= x_2 - L.sin(x_4)
+            \end{aligned}
+        \right.
+    \end{equation}
