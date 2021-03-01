@@ -36,4 +36,14 @@ At first, the robot can cross walls but when it does so its speed decreases and 
 ## Experimental
 
 ### Only one obstacle
-![](data/video/obstacle.gif)
+![video](https://github.com/Paul-antoineLeTolguenec/Actor-critic/blob/master/data/video/obstacle.gif)
+
+### Multiple obstacles
+![video](https://github.com/Paul-antoineLeTolguenec/Actor-critic/blob/master/data/video/obstacles.gif)
+
+### Following a path
+![video](https://github.com/Paul-antoineLeTolguenec/Actor-critic/blob/master/data/video/path.gif)
+
+### The U problem
+
+![video](https://github.com/Paul-antoineLeTolguenec/Actor-critic/blob/master/data/video/U.gif)
