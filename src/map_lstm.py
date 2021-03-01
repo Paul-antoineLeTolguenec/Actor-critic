@@ -1,4 +1,4 @@
-# Self Driving Car
+#Self Driving Car
 
 # Importing the libraries
 import numpy as np
@@ -21,7 +21,7 @@ Config.set('graphics', 'height', '1000')
 
 
 # Importing the Dqn object from our AI in ai.py
-from n_step_ai_tensorflow import *
+from lstm import *
 
 # Adding this line if we don't want the right click to put a red point
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
@@ -33,7 +33,7 @@ n_points = 0
 length = 0
 
 # Getting our AI, which we call "brain", and that contains our neural network that represents our Q-function
-brain = Dqn(5,3,0.9)
+brain = Dqn(6,3,0.9)
 action2rotation = [0,10,-10]
 last_reward = 0
 scores = []
@@ -135,8 +135,9 @@ class Game(Widget):
 
         xx = goal_x - self.car.x
         yy = goal_y - self.car.y
+        distance = np.sqrt((self.car.x - goal_x)**2 + (self.car.y - goal_y)**2)
         orientation = Vector(*self.car.velocity).angle((xx,yy))/180.
-        last_signal = [self.car.signal1, self.car.signal2, self.car.signal3, orientation, -orientation]
+        last_signal = [self.car.signal1, self.car.signal2, self.car.signal3, distance,orientation,-orientation]
         
         action = brain.update(last_reward, last_signal,tape)
         scores.append(brain.score())
@@ -150,7 +151,7 @@ class Game(Widget):
         self.goal.pos=(goal_x,goal_y)
         if sand[int(self.car.x),int(self.car.y)] > 0:
             self.car.velocity = Vector(1, 0).rotate(self.car.angle)
-            last_reward = -1
+            last_reward = -3
         else: # otherwise
             self.car.velocity = Vector(6, 0).rotate(self.car.angle)
             last_reward = -0.2
@@ -233,13 +234,14 @@ class CarApp(App):
 
     def save(self, obj):
         print("saving brain...")
-        brain.save()
+        brain.model.save_weights('brain3/brain_weight')
         plt.plot(scores)
         plt.show()
 
     def load(self, obj):
         print("loading last saved brain...")
-        brain.load()
+        brain.model.load_weights('brain3/brain_weight')
+
 
 # Running the whole thing
 if __name__ == '__main__':

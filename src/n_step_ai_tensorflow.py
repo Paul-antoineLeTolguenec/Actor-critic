@@ -6,6 +6,7 @@ from tensorflow.keras import initializers
 import numpy as np
 import random
 import os
+CUDA_VISIBLE_DEVICES = 0
 from collections import namedtuple
 
 Step = namedtuple('Step', ['state', 'log_prob', 'critic', 'reward'])
@@ -47,7 +48,7 @@ class ReplayMemory(object):
 
 class Dqn():
 	
-	def __init__(self, input_size, nb_action, gamma, n_step=5):
+	def __init__(self, input_size, nb_action, gamma, n_step=15):
 		self.gamma = gamma
 		self.n_step=5
 		self.reward_window = []
@@ -55,7 +56,7 @@ class Dqn():
 		self.memory = ReplayMemory(self.n_step)
 		# Configuration parameters for the whole setup
 		self.eps = np.finfo(np.float32).eps.item()  # Smallest number such that 1.0 + eps != 1.
-		self.optimizer = keras.optimizers.RMSprop(learning_rate=0.006)
+		self.optimizer = keras.optimizers.RMSprop(learning_rate=0.005)
 		self.huber_loss = keras.losses.Huber()
 		self.actor_losses = []
 		self.critic_losses = []
@@ -97,7 +98,9 @@ class Dqn():
 		#self.critic_value_history.append(critic_value[0, 0])
 		
 		# Sample action from action probability distribution
+
 		action = np.random.choice(self.nb_action, p=np.squeeze(action_probs))
+		action_to_make=np.argmax(action_probs)
 		log_prob=tf.math.log(action_probs[0, action])
 		#self.action_probs_history.append(log_prob)
 
@@ -123,7 +126,7 @@ class Dqn():
 			)
 			self.memory.memory=[]
 			
-			if len(self.actor_losses)>=2:
+			if len(self.actor_losses)>=5:
     			
 				# Backpropagation
 				loss_value = 0.5*sum(self.actor_losses) + sum(self.critic_losses)
@@ -143,7 +146,7 @@ class Dqn():
 		self.reward_window.append(reward)
 		if len(self.reward_window) > 1000:
 			del self.reward_window[0]
-		return action
+		return action_to_make
 	
 	def score(self):
 		return sum(self.reward_window)/(len(self.reward_window)+1.)

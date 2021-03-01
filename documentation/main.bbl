@@ -1,0 +1,49 @@
+\begin{thebibliography}{9}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Bhatnagar et~al.(2009)Bhatnagar, Sutton, Ghavamzadeh, and
+  Lee}]{Actor}
+Bhatnagar, S., R.~S. Sutton, M.~Ghavamzadeh, and M.~Lee (2009) \enquote{Natural
+  actor–critic algorithms,} \emph{Automatica} 45(11), 2471--2482, ISSN
+  0005-1098
+
+\bibitem[{Evans et~al.(2021)Evans, Jordaan, and Engelbrecht}]{avoidance}
+Evans, B., H.~W. Jordaan, and H.~A. Engelbrecht (2021) \enquote{Autonomous
+  obstacle avoidance by learning policies for reference modification,}
+
+\bibitem[{Hu et~al.(2018)Hu, Huber, Anumula, and Liu}]{vanishing}
+Hu, Y., A.~E.~G. Huber, J.~Anumula, and S.~Liu (2018) \enquote{Overcoming the
+  vanishing gradient problem in plain recurrent networks,} \emph{CoRR}
+  abs/1801.06105
+
+\bibitem[{Matheron et~al.(2019)Matheron, Perrin, and Sigaud}]{DBLP}
+Matheron, G., N.~Perrin, and O.~Sigaud (2019) \enquote{The problem with {DDPG:}
+  understanding failures in deterministic environments with sparse rewards,}
+  \emph{CoRR} abs/1911.11679
+
+\bibitem[{Mnih et~al.(2016)Mnih, Badia, Mirza, Graves, Lillicrap, Harley,
+  Silver, and Kavukcuoglu}]{A3C}
+Mnih, V., A.~P. Badia, M.~Mirza, A.~Graves, T.~P. Lillicrap, T.~Harley,
+  D.~Silver, and K.~Kavukcuoglu (2016) \enquote{Asynchronous methods for deep
+  reinforcement learning,}
+
+\bibitem[{SC.(2003)}]{ANN}
+SC., W. (2003) \emph{Artificial Neural Network}, The Springer International
+  Series in Engineering and Computer Science,
+
+\bibitem[{Staudemeyer and Morris(2019)}]{LSTM}
+Staudemeyer, R.~C., and E.~R. Morris (2019) \enquote{Understanding {LSTM} - a
+  tutorial into long short-term memory recurrent neural networks,} \emph{CoRR}
+  abs/1909.09586
+
+\bibitem[{{van Hasselt} and {Wiering}(2007)}]{CONT}
+{van Hasselt}, H., and M.~A. {Wiering} (2007) \enquote{Reinforcement learning
+  in continuous action spaces,} in \emph{2007 IEEE International Symposium on
+  Approximate Dynamic Programming and Reinforcement Learning}, pp. 272--279
+
+\bibitem[{Yang et~al.(2019)Yang, Xie, and Wang}]{DQN}
+Yang, Z., Y.~Xie, and Z.~Wang (2019) \enquote{A theoretical analysis of deep
+  q-learning,} \emph{CoRR} abs/1901.00137
+
+\end{thebibliography}

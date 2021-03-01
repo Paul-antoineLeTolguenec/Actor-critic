@@ -1,4 +1,4 @@
-\section{Proposed method}
+\section*{Proposed method}
 The objective of our work is to train an agent to be able to choose the orientation angle of the car according to his perception of the environment. 
 
 \subsection{network structure}
@@ -6,14 +6,14 @@ The objective of our work is to train an agent to be able to choose the orientat
 The structure of the network is quite simple. The network takes as input: 
 the distances output by the sonars, and the angle formed by the direction of the robot and the line passing through the centre of the robot and target.
 To simplify the teaching process, we have discretised the robot's exit space. The robot can make three decisions: do nothing, increment its angle by +20 degrees or -20 degrees.
-Of course, making the exit area discreet means poorer results in the long term. But it allows for a quicker convergence towards a more stable policy.
-    \begin{figure}[!htb]
+Of course, making the exit area discreet means poorer results in the long term. But it allows for a quicker convergence towards a more stable policy \cite{Actor}.
+    \begin{figure}[H]
         \centering
         \includegraphics[width=0.5\textwidth]{imgs/network.png}
         \caption{\label{fig:method} Neural Network Structure}
     \end{figure}
 
-As you can see the network is divided into two parts:
+As you can see the network is divided into two parts\cite{ANN}:
 \begin{itemize}
     \item Critic 
     
@@ -26,14 +26,20 @@ As you can see the network is divided into two parts:
     The actor part corresponds to the part of the agent that takes action. It is the policy-based part of learning. 
     The actor part pulls out a probability distribution $\pi_{\theta}(s)$ which makes it possible to determine what probability is for the agent to take this or that action given the state.
   \end{itemize}
-  The purpose of learning is to change the probability distribution in the direction that gives the maximum reward. 
+  The advantage of such a method is that a continuous space of action can be used.\cite{CONT}
+  Unlike conventional Deep Q-Learning methods.\cite{DQN}
+  The problem is that algorithms such as the DDPG (Deep deterministic policy gradient) which provide a continuous policy space do not guarantee to find the optimal policy for a given network and MDP, which is the case for a stochastic critical actor.
+    Moreover, they introduce many problems that make them difficult to converge.\cite{DBLP}
+    That's why we discretize the space in this problem.
+    Here he purpose of learning is to change the probability distribution in the direction that gives the maximum reward. 
+
   The value part allows to compare the quality of an action carried out in relation to the value of a state already estimated to know if this action is more optimised than what has been done before.
 
 
 \subsection{Advantage Actor Critic algorithm}
 
 To update the network parameters we used reinforcement learning. We used one of the most powerful reinforcement learning algorithms before the A3C. A2C is an algorithm halfway between value based learning and policy based learning.
-\begin{figure}[!htb]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.3\textwidth]{imgs/actro.png}
     \caption{\label{fig:method} Actor Critic}
@@ -41,7 +47,7 @@ To update the network parameters we used reinforcement learning. We used one of 
 
 The Advantage Actor Critic algorithm takes the following form :
 
-\begin{figure}[!htb]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{imgs/actor_critic.jpeg}
     \caption{\label{fig:method} Actor Critic}
@@ -71,10 +77,22 @@ But the most common method is to take as the advantage :  $Rt - V_{\pi_{\theta}(
 
 with $Rt =\gamma^{N}V_{end}+\sum_{k=0}^{N-1} \gamma^k (r_{t+k})$.
 
-As can be seen in figure 4, the advantage part of the algorithm can also be called the TD error.
+
+We have used the Monte-Carlo evaluation.
+The Monte-Carlo method involves letting an agent learn from the environment by interacting with it and collecting samples. This is equivalent to sampling from the probability distribution P(s, a, s’) and R(s, a).
+
+However, Monte-Carlo (MC) estimation is only for trial-based learning. In other words, an MDP without the P tuple can learn by trial-and-error, through many repetitions.
+
+In this learning process, each “try” is called an episode, and all episodes must terminate. That is, the final state of the MDP should be reached. Values for each state are updated only based on final reward Rt, not on estimations of neighbor states — as occurs in the Bellman Optimality Equation.
+
+MC learns from complete episodes and is therefore only suitable for what we call episodic MDP.
+
+Here it's not the case, but we are going to use the same method to take into account more information.
+
+As can be seen in figure 5, the advantage part of the algorithm can also be called the TD error.
 
 In the literature one initially finds $Rt =\gamma V_{t+1}+r_{t}$
-but recent work on replay experience has shown that taking into account more rewards makes it easier to converge towards a global minimum of the cost function estimating the MDP (Markovian decision process).
+but recent work on replay experience has shown that taking into account more rewards (like the monte-carlo evaluation) makes it easier to converge towards a global minimum of the cost function estimating the MDP (Markovian decision process).
 On the other hand, using this method implies a certain volatility of the estimator since a stock affects the value of a state further in time, and it often takes longer to converge.
 It is therefore a question of finding the best hyper-parameters, which are often found empirically.
 
@@ -82,4 +100,15 @@ It is therefore a question of finding the best hyper-parameters, which are often
 In reinforcement learning methods the reward process is very important as it allows the robot to perceive its environment. 
 More importantly, it corresponds to the MRP (Markovian reward process) that we try to estimate thanks to the neural network (the critical part). 
 So if the reward process does not correspond exactly to the environment, the agent will not correctly estimate the behaviour it has to adopt.
+\begin{equation}
+    \label{eqn:constrains}
+    \begin{cases}
+        R_{t}=-2,   \text{ if } None \text{(life penalty)}\\
+        R_{t}=+1,   \text{ if } distance_{t}  <  distance_{t-1}\\
+        R_{t}=-5,   \text{ if } x,y \in \Omega_{sand}\\
 
+    \end{cases}
+\end{equation}
+
+The life penalty, allows the agent to get out of certain situations such as when he comes into contact with a wall and gets stuck. 
+If a negative life penalty is not applied, the robot may get stuck in its situation.

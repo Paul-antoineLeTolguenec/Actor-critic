@@ -1,0 +1,2 @@
+model_checkpoint_path: "brain_weight"
+all_model_checkpoint_paths: "brain_weight"
