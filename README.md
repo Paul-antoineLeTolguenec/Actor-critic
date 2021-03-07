@@ -33,6 +33,14 @@ The walls are represented by the yellow lines. And the objective of the robot is
 At first, the robot can cross walls but when it does so its speed decreases and it gets a negative reward because it has crossed the wall and because it will arrive less quickly at its target.
 
 
+## Dependencies
+kivy 
+
+tensorflow 2.0
+
+## Execute
+        python3 map_tensorflow.py
+
 ## Experimental
 
 ### Only one obstacle
